@@ -152,6 +152,12 @@ const sampleEvents: { [key: string]: Event } = {
     },
 };
 
+export function generateStaticParams() {
+    return Object.keys(sampleEvents).map((id) => ({
+        id: id,
+    }));
+}
+
 export default function EventDetailPage({ params }: { params: { id: string } }) {
     const event = sampleEvents[params.id];
     const [isJoining, setIsJoining] = useState(false);
@@ -382,8 +388,8 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                         onClick={handleJoin}
                         disabled={isFull || isJoining}
                         className={`flex-1 py-4 rounded-full font-bold shadow-lg transition-all ${isFull
-                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:shadow-xl hover:scale-[1.02]'
+                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                            : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:shadow-xl hover:scale-[1.02]'
                             }`}
                     >
                         {isJoining ? '処理中...' : isFull ? '満員です' : '🎉 このイベントに参加する'}
